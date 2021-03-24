@@ -1,13 +1,13 @@
+import React from 'react';
+import { Todo } from './features/todo/Todo';
 import './App.css';
-import ListView from './components/ListView.js';
-import TodoMaker from './components/TodoMaker.js';
 
 function App() {
-
-	return (
+  return (
     <div className="App">
-			<TodoMaker />
-			<ListView />
+      <header className="App-header">
+				<Todo />
+      </header>
     </div>
   );
 }
