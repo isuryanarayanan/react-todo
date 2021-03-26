@@ -2,16 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 export const todoSlice = createSlice({
 	name: 'todo',
 	initialState: {
-		todos: ['todo1'], 
+		todos: [{id:0, content:"todo1"}], 
 	},
 	reducers:{
 		addTodo: (state, action) => {
 			console.log("add todo called with label "+action.payload)
-			state.todos.push(action.payload);
+			state.todos.push({id:state.todos.length,content:action.payload});
 
 		},
 		removeTodo: (state, action) => {
-			state.todos.splice(action.payload, action.payload+1);
+			for(var i=0; i< state.todos.length;i++){
+				if(state.todos[i].id === action.payload){
+					state.todos.splice(i,1);
+				}
+			}
 		},
 	},
 });

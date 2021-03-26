@@ -1,6 +1,6 @@
 //import React, { useState } from 'react';
 import {useSelector, useDispatch } from 'react-redux';
-import { selectTodos, addTodo } from './todoSlice';
+import { selectTodos, addTodo, removeTodo} from './todoSlice';
 //import styles from './Todo.module.css';
 
 export function Todo() {
@@ -13,19 +13,17 @@ export function Todo() {
 	const inputHandler = (e) => {
 		label = e.target.value;
 	}
-	const renderTodos = (arr) => {
-		console.log("rendering")
-		arr.forEach((e)=>{
-			console.log(arr[e])
-		}
-		);
-	}	
+
 	const dispatch = useDispatch();
 	
 	return(
 		<div className="todo">
 			<h1>Todos</h1>
-			{renderTodos(count)}
+			<ul>
+				{count.map(function(item){
+					return <li key={item.id}>{item.content} <button onClick={(e)=>dispatch(removeTodo(item.id))}>delete {item.id}</button></li>;
+				})}
+			</ul>
 			<input onChange={inputHandler} name="todo-input" />
 			<button onClick={(e)=>dispatch(addTodo(label))} name="todo-submit">add</button>
 		</div>
